@@ -1,8 +1,8 @@
 # Entorno de Desarrollo
 
 ## Sistema Operativo
-- **SO utilizado:** Linux (Ubuntu 22.04 LTS) y Windows 11.
-- **Distribución y versión:** Ubuntu 22.04 / Windows 11 + WSL2 (Windows Subsystem for Linux).
+- **SO utilizado:** Fedora 44.
+- **Distribución y versión:** Fedora 44 (Workstation)
 
 ## Herramientas instaladas
 - **Git:** 2.x.x
@@ -18,11 +18,6 @@
   - Tailwind CSS IntelliSense
   - Docker
 
-## Configuración de WSL2
-Para el desarrollo en Windows, se recomienda el uso de WSL2:
-1. Instalación de WSL2 mediante `wsl --install`.
-2. Instalación de la distribución Ubuntu desde la Microsoft Store.
-3. Configuración de VS Code con la extensión "WSL" para abrir el proyecto directamente en el sistema de archivos de Linux.
 
 ## Entorno virtual
 El backend utiliza un entorno virtual de Python para aislar las dependencias:

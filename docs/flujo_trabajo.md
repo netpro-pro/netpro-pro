@@ -1,5 +1,13 @@
 # Evidencia del Flujo de Trabajo Git
 
+## Evidencias de Desarrollo en Linux (Apartado 5.4)
+
+Para dar cumplimiento a los requisitos del entorno de desarrollo y optimizar la gestión de dependencias, automatización y control de versiones, el proyecto ha sido desarrollado íntegramente en un entorno basado en Linux.
+
+- **Entorno Principal:** Fedora 44 (Workstation).
+- **Validación:** Todo el ciclo de vida del software, incluyendo la configuración de la base de datos PostgreSQL, la orquestación de contenedores con Docker y la compilación nativa de la aplicación de escritorio mediante Tauri (Rust), se ha ejecutado en Fedora 44.
+- **Repositorio de Pruebas:** Las evidencias verificables (capturas de pantalla de la terminal, registros de ejecución y logs del sistema) se encuentran disponibles en la carpeta `/evidencias_linux` de este repositorio.
+
 ## Estrategia utilizada
 El proyecto utiliza una variante de **GitHub Flow**, basada en la creación de ramas de funcionalidad (`feature branches`) que se integran a la rama principal (`main`) tras una revisión.
 
