@@ -66,19 +66,33 @@ graph TD
 - **Propósito:** Enrutador principal de la aplicación basado en el estado global.
 - **Lógica:** Utiliza un `switch` sobre la vista actual (`currentView`) para renderizar la página correspondiente (Login, Dashboard, Workspace, etc.).
 
-#### `frontend/src/Monitor.jsx`
-- **Propósito:** Panel de administración de usuarios.
-- **Funcionalidades:** Búsqueda de usuarios, filtrado por rol, edición de roles y eliminación de cuentas.
-
 #### `frontend/src/store/useNetProStore.js`
 - **Propósito:** Gestión de estado global mediante Zustand.
 - **Funcionalidades:** Control de la vista actual, almacenamiento de datos del usuario autenticado, manejo de errores y carga de datos desde la API.
 
 #### `frontend/src/pages/`
+- **Dashboard:** Vista principal de gestión de proyectos.
 - **Workspace:** Área de diseño donde se construye la topología.
-- **Editor:** Interfaz para configurar los detalles de un nodo o enlace.
+- **Editor:** Interfaz para configurar los detalles de un nodo o enlace, incluyendo la calculadora VLSM.
 - **Simulation:** Vista de ejecución de simulaciones de red.
 - **Report:** Visualización de métricas y resultados de simulación.
+- **Monitor:** Panel de administración de usuarios y roles.
+- **VersionHistory:** Historial de versiones y snapshots del proyecto.
+- **VisorLogs:** Registro de auditoría de actividades del sistema.
+- **ConfigurationPage:** Ajustes globales de la aplicación.
+
+### Lógica y Utilidades del Frontend
+Para separar la interfaz de la lógica de negocio, el sistema utiliza hooks personalizados y módulos de utilidad:
+
+#### Hooks de Negocio (`frontend/src/hooks/`)
+- `useSimulationEngine.js`: Gestiona el ciclo de vida de la simulación, el movimiento de paquetes y la detección de colisiones.
+- `useWorkspace.js`: Controla la interacción con el lienzo de React Flow y la persistencia de nodos y enlaces.
+- `useReportMetrics.js`: Procesa los datos de la simulación para generar métricas de rendimiento y analíticas.
+
+#### Utilidades Core (`frontend/src/utils/`)
+- `simulation-utils.js`: Algoritmos de cálculo de rutas y tráfico.
+- `netpro-physics.js`: Lógica de movimiento y animaciones de paquetes en el canvas.
+- `netpro-parser.js`: Transformación de datos entre el formato de la API y el formato interno de React Flow.
 
 ### Desktop Wrapper (Rust/Tauri)
 

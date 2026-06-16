@@ -21,6 +21,7 @@ NetPro es una herramienta diseñada para ingenieros de redes que permite dibujar
 - **Añadir Dispositivos:** Arrastre y suelte los nodos desde la paleta de componentes al lienzo.
 - **Conectar Nodos:** Use la herramienta de enlaces para conectar dos dispositivos.
 - **Configurar Nodo:** Haga doble clic en un dispositivo para abrir el **Editor**, donde podrá definir la IP, máscara, gateway y otros parámetros técnicos.
+- **Calculadora VLSM:** Dentro del Editor, utilice la herramienta de **Cálculo de Subredes (VLSM)** para optimizar la asignación de IPs según la cantidad de hosts requeridos por cada segmento de red.
 - **Guardar Versión:** Una vez satisfecho con el diseño, guarde una "Versión" del proyecto. Esto crea un snapshot del estado actual.
 
 ### 4. Simulación y Análisis
@@ -32,8 +33,9 @@ NetPro es una herramienta diseñada para ingenieros de redes que permite dibujar
 - Acceda a la sección de **Reportes**.
 - Seleccione la simulación realizada y genere un documento con los resultados, métricas de rendimiento y sugerencias de optimización.
 
-### 6. Administración (Solo Superadmin)
-- Acceda al **Monitor de Usuarios** para crear nuevas cuentas, cambiar roles de otros usuarios o eliminar accesos.
+### 6. Administración (Solo Superadmin y Supervisor)
+- **Monitor de Usuarios:** Acceda para crear nuevas cuentas, cambiar roles de otros usuarios o eliminar accesos.
+- **Visor de Logs de Auditoría:** Consulte el historial detallado de actividades del sistema para rastrear quién realizó cambios en las topologías, cuándo se crearon versiones y qué modificaciones se aplicaron.
 
 ## Ejemplos de uso
 
@@ -48,6 +50,13 @@ NetPro es una herramienta diseñada para ingenieros de redes que permite dibujar
 1. En un proyecto existente, ejecute la simulación.
 2. Marque un enlace crítico como "Caído".
 3. Observe cómo el sistema recalcula las rutas y genere el reporte de impacto.
+
+**Caso 3: Optimización de direccionamiento con VLSM**
+1. Crear un proyecto con tres departamentos (Ventas: 50 hosts, IT: 20 hosts, RRHH: 10 hosts).
+2. Abrir la **Calculadora VLSM** en el Editor.
+3. Ingresar la red base (ej: `192.168.10.0/24`) y los requerimientos de hosts.
+4. Asignar las subredes calculadas a cada segmento de la topología para evitar el desperdicio de IPs.
+5. Guardar la configuración como "Versión 1.1 - Optimizada".
 
 ## Errores comunes y soluciones
 

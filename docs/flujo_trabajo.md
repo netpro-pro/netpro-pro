@@ -4,9 +4,19 @@
 El proyecto utiliza una variante de **GitHub Flow**, basada en la creación de ramas de funcionalidad (`feature branches`) que se integran a la rama principal (`main`) tras una revisión.
 
 ## Ramas del repositorio
-- `main`: Rama principal que contiene el código estable y desplegable.
-- `feature/network-logic`: Rama dedicada al desarrollo de la lógica de simulación y cálculo de rutas de red.
-- `feature/security-audit`: Rama utilizada para la implementación de mejoras de seguridad y auditoría de permisos.
+
+| Rama | Issue | Descripción |
+| :--- | :---: | :--- |
+| `feature/issue-1-db-models-auth` | #1 | Definición de modelos de base de datos y sistema de autenticación. |
+| `feature/issue-2-api-proyectos-versiones` | #19 | Desarrollo de endpoints para la gestión de proyectos y versionado. |
+| `feature/issue-3-logs-actividades-seed` | #16 | Implementación de logs de auditoría y scripts de datos semilla (seed). |
+| `feature/issue-4-frontend-setup-zustand` | #17 | Configuración de la arquitectura del frontend y estado global con Zustand. |
+| `feature/issue-5-dashboard-editor` | #20 | Implementación de la interfaz del Dashboard y el Editor de topologías. |
+| `feature/issue-6-api-client-axios-auth` | #21 | Creación del cliente API centralizado con Axios y gestión de tokens JWT. |
+| `feature/issue-7-dockerizacion` | #14 | Configuración de Docker y Docker Compose para el despliegue de infraestructura. |
+| `feature/issue-8-implementacion-docs-base` | #18 | Creación de la estructura inicial de documentación técnica. |
+| `feature/issue-9-testing-docs` | #9 | Documentación de estrategias de prueba y testing del sistema. |
+
 
 ## Historial de Pull Requests
 *Nota: Basado en el historial de commits, se han realizado las siguientes integraciones principales:*
