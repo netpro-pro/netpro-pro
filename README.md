@@ -77,9 +77,19 @@ NetPro es un sistema avanzado de diseño y simulación de topologías de red, de
    npm run dev
    ```
 4. Para ejecutar la versión de escritorio (Tauri):
-   ```bash
-   npm run tauri:dev
-   ```
+   - Instala el CLI de Tauri:
+     ```bash
+     npm install -D @tauri-apps/cli
+     ```
+   - Ejecuta en modo desarrollo:
+     ```bash
+     npm run tauri:dev
+     ```
+5. Para generar el ejecutable (AppImage en Linux):
+   - En algunas versiones es necesario desactivar el stripping de símbolos para evitar fallos en el AppImage:
+     ```bash
+     NO_STRIP=1 npm run tauri build
+     ```
 
 ## Ejecución
 Una vez que el backend y el frontend estén corriendo:
@@ -125,7 +135,7 @@ El proyecto utiliza una estrategia basada en **Feature Branches**:
 - Se utilizan Pull Requests para integrar los cambios de las ramas `feature` hacia `main`, asegurando que el código sea revisado.
 
 ## Entorno de Desarrollo
-- **Sistema Operativo:** Linux (Ubuntu) y Windows (vía WSL2).
+- **Sistema Operativo:** Fedora 44 y Windows (vía WSL2).
 - **IDE Recomendado:** VS Code con extensiones para Python, Rust y React.
 - **Base de Datos:** PostgreSQL.
 
