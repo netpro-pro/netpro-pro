@@ -1,0 +1,117 @@
+/* Variables de Diseño Basadas en NetPro Engine */
+:root {
+  --color-bg-dark: #080616;      /* ing-bg--dark */
+  --color-bg-light: #121826;     /* ing-bg--light */
+  --color-input: #202020;        /* ing_contrast */
+  --color-accent: #00607F;       /* ing_color--light */
+  --color-white: #FFFFFF;
+  
+  /* Escala de fuentes (dp) */
+  --font-title: 48px;            /* Ag Title */
+  --font-forms: 32px;            /* Ag Forms */
+  --font-small: 16px;            /* Ag Text Small */
+}
+
+/* Estructura Base */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--color-bg-dark);
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* form__login: Tarjeta Principal */
+.login-card {
+  background-color: var(--color-bg-light);
+  width: 100%;
+  max-width: 650px;
+  border-radius: 40px; /* 2.5rem */
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* logo: Identidad */
+.login-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.login-logo__icon {
+  width: 120px;
+  height: 120px;
+  color: var(--color-accent);
+  margin-bottom: 15px;
+}
+
+.login-logo__text {
+  color: var(--color-white);
+  font-size: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+/* form: Elementos de entrada */
+.login-form {
+  width: 100%;
+}
+
+.login-form__group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.login-form__label {
+  color: var(--color-white);
+  font-size: var(--font-forms);
+  margin-bottom: 12px;
+  padding-left: 5px;
+}
+
+.login-form__input {
+  background-color: var(--color-input);
+  border: none;
+  border-radius: 12px;
+  height: 80px;
+  padding: 0 25px;
+  color: var(--color-white);
+  font-size: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.login-form__input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+/* button__login: Acción */
+.login-form__button {
+  width: 100%;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  font-size: var(--font-forms);
+  font-weight: 700;
+  height: 90px;
+  border: none;
+  border-radius: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.login-form__button:hover {
+  background-color: #0078a0;
+}

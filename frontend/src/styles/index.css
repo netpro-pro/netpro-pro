@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Fondos — de más oscuro a más claro */
+  --np-bg:          #080616;   /* ing-bg--dark */
+  --np-surface:     #121826;   /* ing-bg--light */
+  --np-elevated:    #1a2332;   /* ligeramente más claro que surface */
+  --np-overlay:     #202020;   /* ing_contrast */
+  --np-card-preview:#ffffff;   /* canvas blanco de previsualización */
+
+  /* Bordes */
+  --np-border:       rgba(255,255,255,0.08);
+  --np-border-strong:rgba(255,255,255,0.16);
+
+  /* Texto */
+  --np-text:         #FFFFFF;  /* text--white */
+  --np-text-dim:     #a8b8c8;
+  --np-text-muted:   #746E6E;  /* trazo_admin */
+
+  /* Acento principal — teal oscuro */
+  --np-accent:       #00607F;  /* ing_color--light */
+  --np-accent-hover: #00789d;
+  --np-accent-press: #004d66;
+  --np-accent-glow:  rgba(0,96,127,0.30);
+
+  /* Cyan brillante (conexiones wifi) */
+  --np-cyan:         #53EEFF;  /* conexion--wifi */
+
+  /* Semáforos */
+  --np-danger:       #D40F0F;  /* ing_button_clear */
+  --np-danger-hover: #f01a1a;
+  --np-success:      #3fb950;
+
+  /* Otros roles */
+  --np-admin:        #1557A8;  /* admin_button */
+  --np-copper:       #8D5D04;  /* conexion--copper */
+
+  /* Dorado (acento secundario destacado, usado por tema admin) */
+  --np-gold:         #d4a017;
+  --np-gold-hover:   #eab308;
+}
+
+.np-theme-admin {
+  /* Fondos rojo-vino oscuro */
+  --np-bg:          #0e0606;   /* casi negro con tinte rojizo */
+  --np-surface:     #2b1010;   /* rojo vino oscuro (header y tarjetas) */
+  --np-elevated:    #1a0a0a;   /* inputs / filas alternas */
+  --np-overlay:     #3a1414;   /* botones secundarios */
+
+  /* Bordes con tinte cálido */
+  --np-border:       rgba(255,180,140,0.10);
+  --np-border-strong:rgba(255,180,140,0.22);
+
+  /* Texto */
+  --np-text:         #FFFFFF;
+  --np-text-dim:     #d4c5b8;  /* beige claro */
+  --np-text-muted:   #9a8a7a;  /* beige/marrón claro */
+
+  /* Acento principal — naranja brillante (botones primarios) */
+  --np-accent:       #ea7c1c;
+  --np-accent-hover: #f59327;
+  --np-accent-press: #c66614;
+  --np-accent-glow:  rgba(234,124,28,0.30);
+
+  /* Cyan — encabezados de sección destacados */
+  --np-cyan:         #4ec9d4;
+
+  /* Peligro — rojo brillante (sólo botones de Eliminar) */
+  --np-danger:       #dc2626;
+  --np-danger-hover: #ef4444;
+
+  /* Dorado — acento secundario (Editar Rol, Comparar Versiones, etc.) */
+  --np-gold:         #d4a017;
+  --np-gold-hover:   #eab308;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--np-bg);
+  color: var(--np-text);
+  font-family: 'Roboto', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--np-bg); }
+::-webkit-scrollbar-thumb { background: var(--np-border-strong); border-radius: 4px; }
+
+/* Animaciones */
+@keyframes np-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.np-fade-up { animation: np-fade-up 280ms ease-out both; }
+
+@keyframes np-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+.np-pulse { animation: np-pulse 2s ease-in-out infinite; }
+
+/* Utilidades tipográficas */
+.np-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--np-text-muted);
+  font-weight: 500;
+}
+.np-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
