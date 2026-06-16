@@ -1,0 +1,50 @@
+services:
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin_netpro
+      POSTGRES_PASSWORD: password_seguro
+      POSTGRES_DB: netpro_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin_netpro -d netpro_db"]
+      interval: 3s
+      timeout: 5s
+      retries: 15
+      start_period: 10s   # Da 10s antes de empezar a contar intentos
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ../backend:/app
+    environment:
+      - WATCHFILES_FORCE_POLLING=true
+      - DATABASE_URL=postgresql+asyncpg://admin_netpro:password_seguro@db:5432/netpro_db
+      - DB_ECHO=0
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
