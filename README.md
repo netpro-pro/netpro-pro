@@ -1,212 +1,136 @@
-# NetPro System
+# NetPro
 
-Sistema de diseño, versionado y simulación de topologías de red.
+NetPro es un sistema avanzado de diseño y simulación de topologías de red, desarrollado para permitir a ingenieros y supervisores planificar, versionar y analizar infraestructuras de red de manera eficiente. La aplicación combina una interfaz web moderna con la potencia de un ejecutable de escritorio mediante Tauri.
 
-## Stack
+## Objetivos
+- Facilitar el diseño visual de topologías de red utilizando herramientas de diagramación.
+- Implementar un control de versiones para los diseños de red, permitiendo rastrear cambios y revertir versiones.
+- Proporcionar una simulación de red para validar el comportamiento de la topología.
+- Generar reportes detallados de los resultados de las simulaciones.
+- Gestionar roles de usuario (Ingeniero, Supervisor, Superadmin) para controlar el acceso a las funcionalidades.
 
-| Capa | Tecnología |
-|---|---|
-| Frontend | React 18 + Vite + Zustand + Tailwind CSS |
-| Backend  | FastAPI + SQLAlchemy 2 (async) + asyncpg |
-| Base de datos | PostgreSQL 15 |
-| Contenedores | Docker Compose |
+## Requisitos
+- **Sistema Operativo:** Windows 10+, Linux (Ubuntu 22.04+ recomendado) o macOS.
+- **Lenguajes y Herramientas:**
+  - Python 3.11+
+  - Node.js 18+ y npm/yarn
+  - Rust (estable) y Cargo (para la compilación de Tauri)
+  - PostgreSQL 15+
+  - Docker y Docker Compose (opcional, para despliegue rápido)
 
----
+## Instalación
 
-## Arranque rápido (Docker Compose)
+### Opción 1: Usando Docker (Recomendado para desarrollo rápido)
+1. Clona el repositorio:
+   ```bash
+   git clone <url-del-repo>
+   cd netpro
+   ```
+2. Inicia los servicios (Backend y Base de Datos):
+   ```bash
+   docker-compose -f infra/docker-compose.yml up -d
+   ```
+3. Instala las dependencias del frontend:
+   ```bash
+   cd frontend
+   npm install
+   ```
+4. Ejecuta el frontend en modo desarrollo:
+   ```bash
+   npm run dev
+   ```
 
-```bash
-# Desde la carpeta raíz del proyecto:
-cd infra
-docker compose up --build
+### Opción 2: Instalación Manual
+
+#### Backend
+1. Navega a la carpeta del backend:
+   ```bash
+   cd backend
+   ```
+2. Crea y activa un entorno virtual:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/macOS
+   # venv\Scripts\activate  # Windows
+   ```
+3. Instala las dependencias:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Configura las variables de entorno creando un archivo `.env` basado en `env.example`.
+5. Inicia el servidor:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
+#### Frontend (Web/Tauri)
+1. Navega a la carpeta del frontend:
+   ```bash
+   cd frontend
+   ```
+2. Instala dependencias:
+   ```bash
+   npm install
+   ```
+3. Ejecuta en modo desarrollo web:
+   ```bash
+   npm run dev
+   ```
+4. Para ejecutar la versión de escritorio (Tauri):
+   ```bash
+   npm run tauri:dev
+   ```
+
+## Ejecución
+Una vez que el backend y el frontend estén corriendo:
+- Accede a `http://localhost:5173` (o el puerto indicado por Vite).
+- **Credenciales de prueba (Seed):**
+  - Admin: `admin` / `admin123`
+  - Ingeniero: `ing_demo` / `demo1234`
+  - Supervisor: `supervisor` / `super123`
+
+## Estructura de Directorios
+```text
+netpro/
+├── backend/           # API REST desarrollada con FastAPI
+│   ├── app/           # Lógica de la aplicación
+│   │   ├── core/      # Configuraciones y utilidades centrales
+│   │   ├── routers/   # Endpoints de la API
+│   │   ├── models.py  # Modelos de SQLAlchemy
+│   │   ├── schemas.py # Esquemas de Pydantic
+│   │   └── main.py    # Punto de entrada de la API
+│   ├── Dockerfile     # Configuración de contenedor backend
+│   └── requirements.txt # Dependencias de Python
+├── frontend/          # Interfaz de usuario y wrapper de escritorio
+│   ├── src/           # Código fuente de React
+│   │   ├── api/       # Clientes de comunicación con backend
+│   │   ├── components/ # Componentes reutilizables
+│   │   ├── pages/     # Vistas principales (Dashboard, Workspace, etc.)
+│   │   └── store/     # Gestión de estado global (Zustand)
+│   ├── src-tauri/     # Configuración y código Rust de Tauri
+│   │   ├── src/       # Lógica de backend de escritorio en Rust
+│   │   └── tauri.conf.json # Configuración de la aplicación Tauri
+│   ├── Dockerfile     # Configuración de contenedor frontend
+│   └── package.json   # Dependencias de Node.js
+├── infra/             # Configuración de infraestructura
+│   └── docker-compose.yml # Orquestación de servicios (App + DB)
+├── docs/              # Documentación técnica detallada
+└── README.md          # Guía principal del proyecto
 ```
 
-| Servicio | URL |
-|---|---|
-| Frontend (Vite) | http://localhost:5173 |
-| Backend (FastAPI) | http://localhost:8000 |
-| Docs interactivas | http://localhost:8000/docs |
+## Flujo de Trabajo Git
+El proyecto utiliza una estrategia basada en **Feature Branches**:
+- `main`: Contiene el código estable y listo para producción.
+- `feature/*`: Ramas temporales para el desarrollo de nuevas funcionalidades o correcciones (ej: `feature/network-logic`).
+- Se utilizan Pull Requests para integrar los cambios de las ramas `feature` hacia `main`, asegurando que el código sea revisado.
 
-### Credenciales de desarrollo (seed automático)
+## Entorno de Desarrollo
+- **Sistema Operativo:** Linux (Ubuntu) y Windows (vía WSL2).
+- **IDE Recomendado:** VS Code con extensiones para Python, Rust y React.
+- **Base de Datos:** PostgreSQL.
 
-| Usuario | Contraseña | Rol |
-|---|---|---|
-| `admin` | `admin123` | Superadmin |
-| `ing_demo` | `demo1234` | Ingeniero |
+## Autores
+- [NetPro Team]
 
-> ⚠️ Las contraseñas están en **texto plano** en el seed. Para producción, reemplazar por bcrypt en `main.py → seed_initial_data()`.
-
----
-
-## Arranque local (sin Docker)
-
-### Backend
-
-```bash
-cd backend
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp env.example .env          # Ajusta DATABASE_URL a tu Postgres local
-uvicorn app.main:app --reload --port 8000
-```
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
----
-
-## App de escritorio (Tauri)
-
-NetPro se puede empaquetar como app nativa de escritorio (Windows/macOS/Linux)
-con [Tauri 2](https://v2.tauri.app/). El frontend React es exactamente el mismo;
-Tauri solo añade un shell Rust + WebView del sistema.
-
-> **Arquitectura:** Tauri envuelve el frontend; el backend FastAPI sigue siendo
-> un servicio aparte. La app de escritorio se comunica con `VITE_API_URL`
-> exactamente como el frontend web, así que se puede correr el backend en
-> Docker Compose y abrir la app de escritorio en paralelo.
-
-### Pre-requisitos (una sola vez)
-
-1. **Rust** — instalar con [rustup](https://rustup.rs/).
-2. **Dependencias del sistema** (solo Linux): seguir la
-   [guía oficial](https://v2.tauri.app/start/prerequisites/) (paquetes de
-   `webkit2gtk`, `libssl-dev`, `build-essential`, etc.).
-3. **WebView2** (solo Windows): viene preinstalado en Windows 11 y en la
-   mayoría de Windows 10 actualizado; si falta, lo proporciona el bundle.
-
-### Desarrollo
-
-```bash
-cd frontend
-npm install
-npm run tauri:dev          # Compila Rust, levanta Vite y abre la ventana
-```
-
-La primera ejecución descarga y compila las crates de Tauri (~5–10 min).
-Las siguientes son incrementales (~10 s).
-
-> Hot Module Reload del frontend funciona igual que en navegador; los cambios
-> en archivos `.rs` recompilan y reinician la ventana automáticamente.
-
-### Build de producción
-
-```bash
-cd frontend
-cp .env.production.example .env.production    # Ajustar VITE_API_URL si aplica
-npm run tauri:build
-```
-
-Genera instaladores en `src-tauri/target/release/bundle/`:
-
-| SO | Formato |
-|---|---|
-| Windows | `.msi` y `.exe` (NSIS) |
-| macOS | `.dmg` y `.app` |
-| Linux | `.deb`, `.rpm` y `.AppImage` |
-
-### Iconos
-
-Los iconos en `src-tauri/icons/` son **placeholders** generados automáticamente
-(cuadrado teal con la "N"). Para producción, sustituirlos con el logo real:
-
-```bash
-cd frontend
-npm run tauri:icon ruta/al/logo.png   # Genera todos los tamaños/formatos
-```
-
-### Comandos Rust expuestos al frontend
-
-Definidos en `src-tauri/src/lib.rs`. Usar desde React vía
-`src/utils/runtime.js`:
-
-```js
-import { invokeTauri, isTauri } from './utils/runtime'
-
-if (isTauri) {
-  const version = await invokeTauri('app_version')   // "1.0.0"
-  const info    = await invokeTauri('runtime_info')  // { platform, arch, ... }
-}
-```
-
-En navegador, `invokeTauri()` devuelve `null` sin error: el mismo bundle sirve
-para web y desktop.
-
-### Estructura añadida
-
-```
-frontend/
-├── src-tauri/                # Shell Rust de la app de escritorio
-│   ├── Cargo.toml            # Dependencias Rust (tauri, plugin-shell, serde)
-│   ├── build.rs              # Hook de compilación (inyecta tauri.conf.json)
-│   ├── tauri.conf.json       # Config: ventana, bundle, identifier, CSP, etc.
-│   ├── src/
-│   │   ├── main.rs           # Entry point del binario (no tocar habitualmente)
-│   │   └── lib.rs            # Aquí van los #[tauri::command]
-│   ├── capabilities/
-│   │   └── default.json      # ACL: qué APIs Tauri puede llamar el frontend
-│   └── icons/                # Iconos para todos los SOs
-└── src/utils/runtime.js      # Helpers `isTauri` / `invokeTauri`
-```
-
----
-
-## Variables de entorno importantes
-
-| Variable | Descripción | Ejemplo |
-|---|---|---|
-| `DATABASE_URL` | Cadena de conexión async | `postgresql+asyncpg://user:pass@host:5432/db` |
-| `DB_ECHO` | SQL logging (0/1) | `0` |
-| `VITE_API_URL` | URL del backend (frontend) | `http://localhost:8000` |
-
-> ⚠️ **El prefijo `postgresql+asyncpg://` es obligatorio.** Usar `postgresql://` causa un error al conectar porque SQLAlchemy no carga el driver async.
-
----
-
-## Estructura del proyecto
- 
- ```
- netpro/
- ├── backend/
- │   ├── app/
- │   │   ├── main.py          # Punto de entrada, CORS, lifespan, seed
- │   │   ├── database.py      # Engine async, sesiones, init_db()
- │   │   ├── models.py        # ORM: Rol, Usuario, Proyecto, Version, Reporte, Log
- │   │   ├── schemas.py       # Pydantic DTOs (LoginRequest/Response, ProyectoDetalle…)
- │   │   ├── core/
- │   │   │   └── network_logic.py
- │   │   └── routers/
- │   │       ├── auth.py      # Autenticación y JWT
- │   │       ├── proyectos.py # Gestión de topologías
- │   │       ├── usuarios.py  # CRUD de usuarios y roles
- │   │       ├── versiones.py # Versionado de topologías
- │   │       ├── actividades.py# Registro de cambios
- │   │       └── logs.py      # Logs del sistema
- │   ├── requirements.txt
- │   ├── Dockerfile
- │   └── env.example
- ├── frontend/
- │   ├── src/
- │   │   ├── main.jsx          # Entry point (React + Zustand)
- │   │   ├── App.jsx           # State-driven router
- │   │   ├── store/            # Estado global (slices, constants)
- │   │   │   └── useNetProStore.js
- │   │   ├── api/              # Clientes API (axios/fetch)
- │   │   │   └── netproApi.js
- │   │   ├── pages/            # Pantallas principales (Dashboard, Editor, Simulation, etc.)
- │   │   ├── components/       # Componentes UI organizados por módulo (admin, simulation, etc.)
- │   │   ├── hooks/            # Lógica de negocio reutilizable
- │   │   ├── utils/            # Helpers de red, física y validaciones
- │   │   └── styles/           # Design tokens (fuente única de verdad CSS)
- │   ├── index.html
- │   ├── vite.config.js
- │   ├── tailwind.config.js
- │   └── package.json
- └── infra/
-     └── docker-compose.yml
- ````
+## Licencia
+Este proyecto se distribuye bajo una licencia propietaria/interna.
