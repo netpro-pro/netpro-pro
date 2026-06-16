@@ -85,11 +85,16 @@ NetPro es un sistema avanzado de diseño y simulación de topologías de red, de
      ```bash
      npm run tauri:dev
      ```
-5. Para generar el ejecutable (AppImage en Linux):
-   - En algunas versiones es necesario desactivar el stripping de símbolos para evitar fallos en el AppImage:
-     ```bash
-     NO_STRIP=1 npm run tauri build
-     ```
+5. Para generar el ejecutable:
+   - **En Linux (AppImage):**
+     - En algunas versiones es necesario desactivar el stripping de símbolos para evitar fallos:
+       ```bash
+       NO_STRIP=1 npm run tauri build
+       ```
+   - **En Windows (vía GitHub Actions):**
+     - Debido a los requisitos de compilación, se utiliza una acción automatizada en GitHub.
+     - **Procedimiento:** Ir a la pestaña **Actions** $\rightarrow$ Seleccionar **"Build Windows"** $\rightarrow$ **"Run workflow"**.
+     - **Resultado:** Los instaladores `.msi` y `.exe` estarán disponibles en la sección de **Artifacts** de la ejecución finalizada.
 
 ## Ejecución
 Una vez que el backend y el frontend estén corriendo:
